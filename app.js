@@ -1,12 +1,14 @@
-//segundo commit
 const express = require ('express');
+const mongoose = require('mongoose');
+const Item = require('./models/items');
 //creamos una instancia de express en la const app
 const app = express(); 
 // Usamos la libreria de ejs
 app.set('view engine', 'ejs')
 
-const mongoose = require('mongoose');
-const Item = require('./models/items');
+// Returns middleware that only parses urlencoded bodies and only looks at requests 
+//where the Content-Type header matches the type option.
+app.use(express.urlencoded({ extended: true}))
  
 //enlace a la db
 const mongodb = 'mongodb+srv://ckmobile:ckmobile@item.ebuz7.mongodb.net/item-database?retryWrites=true&w=majority'
@@ -36,6 +38,13 @@ app.get('/add-item',(req,res) => {
     res.render('add-item');
 });
 
+app.post('/items', (req, res) => {
+    console.log(req.body);
+    const item = Item(req.body);
+    item.save().then(() => {
+        res.redirect('/get-items');
+    }).catch(err => console.log(err));
+})
 // Seteamos la respuesta para cuando se quiere acceder a una ruta inexistente
 // Es importante colocar este seteo al finally, luego de definidos todas las otras rutas
 app.use((req,res) => {
