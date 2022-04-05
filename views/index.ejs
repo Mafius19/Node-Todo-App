@@ -1,26 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <%- include('./partials/head.ejs') %>
-<body>
-    <%- include('./partials/nav.ejs') %>
-    <div class="container">
-        <ul class="collection with-header">
-                
-                <% if (items.length > 0) { %>
-                    <%items.forEach(item => { %>
-                        <li class="collection-item"><div><%= item.name %> $<%= item.price  %> <a href="#!" class="secondary-content">
-                            <i class="material-icons">delete</i>
-                            <i class="material-icons">edit</i>
-                        </a></div></li>
-                    <%}); %>
-                <% } else { %>
-                    <li>There are no items</li> 
-                <% } %>
-        </ul>
-    </div>
-    
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</body>
+
+    <body>
+        <%- include('./partials/nav.ejs') %>
+            <div class="container">
+                <ul class="collection with-header">
+
+                    <% if (items.length> 0) { %>
+                        <%items.forEach(item=> { %>
+                            <li class="collection-item">
+                                <div> <a href="/items/<%= item.id%>"> <%= item.name %> $<%= item.price  %> </a>
+                                    <a href="#!" class="secondary-content">
+                                        <i class="material-icons">delete</i>
+                                        <i class="material-icons">edit</i>
+                                    </a>
+                                </div>
+                            </li>
+                            <%}); %>
+                                <% } else { %>
+                                    <li>There are no items</li>
+                                    <% } %>
+                </ul>
+            </div>
+
+            <!-- Compiled and minified JavaScript -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
 
 </html>

@@ -45,6 +45,15 @@ app.post('/items', (req, res) => {
         res.redirect('/get-items');
     }).catch(err => console.log(err));
 })
+
+app.get('/items/:id', (req, res) => {
+    console.log(req.params)
+    const id = req.params.id;
+    Item.findById(id).then(result => {
+        console.log('result', result)
+        res.render('item-detail', {item: result})
+    })
+})
 // Seteamos la respuesta para cuando se quiere acceder a una ruta inexistente
 // Es importante colocar este seteo al finally, luego de definidos todas las otras rutas
 app.use((req,res) => {
