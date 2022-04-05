@@ -64,9 +64,7 @@ app.delete('/items/:id', (req, res) => {
     console.log(req.params)
     const id = req.params.id;
     Item.findByIdAndDelete(id).then(result => {
-        // este redirect no funciona porque app.get viene de un onclick y no un form
-        // este error se fixea en el siguiente ejercicio
-        res.redirect('/get-items')
+        res.json({redirect: '/get-items'})
     })
 })
 // Seteamos la respuesta para cuando se quiere acceder a una ruta inexistente
