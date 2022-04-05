@@ -23,6 +23,7 @@ mongoose.connect(mongodb).then(() => {
 //     res.sendFile('./views/index.html', {root:__dirname});
 // });
 
+// url de inicio al levantar el programa
 app.get('/',(req,res) => {
     res.redirect('/get-items')
 });
@@ -34,10 +35,12 @@ app.get('/get-items', (req, res) => {
     }).catch(error => console.log(error) )
 })
 
+// url que agrega un nuevo item a la base
 app.get('/add-item',(req,res) => {
     res.render('add-item');
 });
 
+// Post en la base un nuevo item creado y pasado por request
 app.post('/items', (req, res) => {
     console.log(req.body);
     const item = Item(req.body);
@@ -46,12 +49,24 @@ app.post('/items', (req, res) => {
     }).catch(err => console.log(err));
 })
 
+// Get de un item en particular y redireccionamiento a la pagina que muestra sus campos
 app.get('/items/:id', (req, res) => {
     console.log(req.params)
     const id = req.params.id;
     Item.findById(id).then(result => {
         console.log('result', result)
         res.render('item-detail', {item: result})
+    })
+})
+
+// Delete de un item en particular en la base
+app.delete('/items/:id', (req, res) => {
+    console.log(req.params)
+    const id = req.params.id;
+    Item.findByIdAndDelete(id).then(result => {
+        // este redirect no funciona porque app.get viene de un onclick y no un form
+        // este error se fixea en el siguiente ejercicio
+        res.redirect('/get-items')
     })
 })
 // Seteamos la respuesta para cuando se quiere acceder a una ruta inexistente

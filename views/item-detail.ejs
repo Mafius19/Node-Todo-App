@@ -10,9 +10,25 @@
                     <h5>item name: <%= item.name %> </h5>
                     <h5>item price: $<%= item.price %> </h5>
                 </div>
-                <a class="delete btn" href="">delete</a>
+                <a id="deleteBtn" class="delete btn" data-id="<%= item.id %> " href="">delete</a>
             </div>
 
+            <script>
+                deleteBtn.onclick = function(e) {
+                    e.preventDefault();
+                    const id = deleteBtn.dataset.id;
+                    // otras forma de captar el id
+                    const id2 = this.dataset.id;
+                    const id3 = e.target.getAttribute("data-id");
+                    console.log(id)
+                    console.log(id2)
+                    console.log(id3)
+                    const endpoint =`/items/${id}`
+                    fetch(endpoint, {
+                        method: 'DELETE'
+                    }).then(() => {}).catch(err => console.log(err))
+                }
+            </script>
             <!-- Compiled and minified JavaScript -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>
