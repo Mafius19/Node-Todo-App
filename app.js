@@ -67,6 +67,15 @@ app.delete('/items/:id', (req, res) => {
         res.json({redirect: '/get-items'})
     })
 })
+
+// Put de un item en particular en la base
+app.put('/items/:id', (req, res) => {
+    console.log(req.params)
+    const id = req.params.id;
+    Item.findByIdAndUpdate(id, req.body).then(result => {
+        res.json({msg: 'Updated successfuly'})
+    })
+})
 // Seteamos la respuesta para cuando se quiere acceder a una ruta inexistente
 // Es importante colocar este seteo al finall y, luego de definidos todas las otras rutas
 app.use((req,res) => {
