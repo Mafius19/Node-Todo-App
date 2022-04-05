@@ -10,10 +10,12 @@
                     <% if (items.length> 0) { %>
                         <%items.forEach(item=> { %>
                             <li class="collection-item">
-                                <div> <a href="/items/<%= item.id%>"> <%= item.name %> $<%= item.price  %> </a>
+                                <div> <a href="/items/<%= item.id%>">
+                                        <%= item.name %> $<%= item.price %>
+                                    </a>
                                     <a href="#!" class="secondary-content">
                                         <i class="material-icons">delete</i>
-                                        <i class="material-icons">edit</i>
+                                        <i class="material-icons modal-trigger" href="#edit_item_modal">edit</i>
                                     </a>
                                 </div>
                             </li>
@@ -23,7 +25,23 @@
                                     <% } %>
                 </ul>
             </div>
-
+            <!-- Modal Structure sacado de: https://materializecss.com/modals.html#!-->
+            <div id="edit_item_modal" class="modal">
+                <div class="modal-content">
+                    <h4>Edit Form</h4>
+                    <form id="edit_form" action="">
+                        <input type="text" name="name" placeholder="item name">
+                        <input type="number" name="price" placeholder="item name">
+                        <button class="btn">Update</button>
+                    </form>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var elems = document.querySelectorAll('.modal');
+                    var instances = M.Modal.init(elems);
+                });
+            </script>
             <!-- Compiled and minified JavaScript -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     </body>
