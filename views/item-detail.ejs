@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/nav.ejs') %>
+            <div class="container">
+                <h4>Item Detail</h4>
+                <div>
+                    <h5>item name: <%= item.name %> </h5>
+                    <h5>item price: $<%= item.price %> </h5>
+                </div>
+                <a class="delete btn" href="">delete</a>
+            </div>
+
+            <!-- Compiled and minified JavaScript -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    </body>
+
+</html>

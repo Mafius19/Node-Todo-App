@@ -55,7 +55,7 @@ app.get('/items/:id', (req, res) => {
     })
 })
 // Seteamos la respuesta para cuando se quiere acceder a una ruta inexistente
-// Es importante colocar este seteo al finally, luego de definidos todas las otras rutas
+// Es importante colocar este seteo al finall y, luego de definidos todas las otras rutas
 app.use((req,res) => {
     res.render('error');
 })
